@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eugeneCollections.Domain.Repositories.Abstract
 {
-    interface IUserRepository
+    public interface IUserRepository
     {
         public User GetUserById(Guid id);
         public IQueryable<User> GetAllUsers();

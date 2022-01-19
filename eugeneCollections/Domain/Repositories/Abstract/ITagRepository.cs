@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eugeneCollections.Domain.Repositories.Abstract
 {
-    interface ITagRepository
+    public interface ITagRepository
     {
         public void AddTag(Tag tag);
         public IQueryable<Tag> GetAllTags();

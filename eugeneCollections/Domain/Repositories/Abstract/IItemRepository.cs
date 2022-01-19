@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eugeneCollections.Domain.Repositories.Abstract
 {
-    interface IItemRepository
+    public interface IItemRepository
     {
         public void AddItem(Item item);
         public void DeleteItem(int id);

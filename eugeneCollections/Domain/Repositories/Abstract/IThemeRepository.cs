@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eugeneCollections.Domain.Repositories.Abstract
 {
-    interface IThemeRepository
+    public interface IThemeRepository
     {
         public IQueryable<Theme> GetThemes();
     }

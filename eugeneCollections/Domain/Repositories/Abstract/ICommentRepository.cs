@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eugeneCollections.Domain.Repositories.Abstract
 {
-    interface ICommentRepository
+    public interface ICommentRepository
     {
         public void AddComment(Comment comment);
         public IQueryable<Comment> GetComments(int id);//get comment by ItemId
