@@ -8,10 +8,10 @@ namespace eugeneCollections.Domain.Repositories.Abstract
 {
     interface ICollectionRepository
     {
-        public void AddCollection();
+        public void AddCollection(Collection collection);
         public void DeleteCollection(int id);
         public void UpdateCollection(int id);
-        public void SaveCollection(Collection entity);
+        public void SaveCollection(Collection entity);//?
         public IQueryable<Collection> GetCollections();
         public IQueryable<Collection> GetCollectionsByUser(Guid Id);
     }
