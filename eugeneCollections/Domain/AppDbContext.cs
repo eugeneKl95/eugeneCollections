@@ -35,7 +35,7 @@ namespace eugeneCollections.Domain
             };
             modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole[] { admin, user });
 
-            modelBuilder.Entity<IdentityUser>().HasData(new IdentityUser
+            modelBuilder.Entity<User>().HasData(new User
             {
                 Id = "2e7260d4-1372-412d-aadb-061d53bb1ec3",
                 UserName = "admin",
@@ -44,7 +44,8 @@ namespace eugeneCollections.Domain
                 NormalizedEmail = "MY@EMAIL.COM",
                 EmailConfirmed = true,
                 PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "superpassword"),
-                SecurityStamp = string.Empty
+                SecurityStamp = string.Empty,
+                State = "Active"
             });
 
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
@@ -52,6 +53,8 @@ namespace eugeneCollections.Domain
                 RoleId = "453a9142b-6d96-44fe-b817-982b5528f922",
                 UserId = "2e7260d4-1372-412d-aadb-061d53bb1ec3"
             });
+            modelBuilder.Entity<Like>().HasKey(y=>new {y.UserId, y.ItemId });
+
 
             modelBuilder.Entity<Theme>().HasData(new Theme
             {

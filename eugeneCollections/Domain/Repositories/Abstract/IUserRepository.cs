@@ -8,11 +8,11 @@ namespace eugeneCollections.Domain.Repositories.Abstract
 {
     public interface IUserRepository
     {
-        public User GetUserById(Guid id);
+        public User GetUserById(string id);
         public IQueryable<User> GetAllUsers();
-        public void DeleteUserById(Guid id);
-        public void BlockUserById(Guid id);
-        public void UnblockUserById(Guid id);
-        public void SetAdmin(Guid id);
+        public void DeleteUserById(string id);
+        public void BlockUserById(string id);
+        public void UnblockUserById(string id);
+        public void SetAdmin(string id);
     }
 }

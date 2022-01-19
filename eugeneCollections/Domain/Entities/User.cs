@@ -9,5 +9,6 @@ namespace eugeneCollections.Domain.Entities
     public class User: IdentityUser
     {
         public List<Collection> userCollections { get; set; }
+        public string State { get; set; }
     }
 }

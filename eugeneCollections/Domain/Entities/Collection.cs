@@ -11,6 +11,6 @@ namespace eugeneCollections.Domain.Entities
         public string Description { get; set; }
         public DateTime DateCreating { get; set; }
         public int ThemeId { get; set; }
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
     }
 }
