@@ -1,4 +1,5 @@
-﻿using eugeneCollections.Domain.Entities;
+﻿using eugeneCollections.Domain;
+using eugeneCollections.Domain.Entities;
 using eugeneCollections.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,10 +13,12 @@ namespace eugeneCollections.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
-        public AccountController(UserManager<User> userMgr, SignInManager<User> signinMgr)
+        private readonly DataManager dataManager;
+        public AccountController(UserManager<User> userMgr, SignInManager<User> signinMgr,DataManager datamanager)
         {
             userManager = userMgr;
             signInManager = signinMgr;
+            dataManager = datamanager;
         }
 
         [AllowAnonymous]
@@ -56,7 +59,7 @@ namespace eugeneCollections.Controllers
         [AllowAnonymous]
         public IActionResult Register()
         {
-            return View();
+            return View(new RegisterViewModel());
         }
         [HttpPost]
         [AllowAnonymous]
