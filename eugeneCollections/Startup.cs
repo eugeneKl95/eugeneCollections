@@ -74,11 +74,12 @@ namespace eugeneCollections
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseHttpsRedirection();
             app.UseStaticFiles(); //add supporting static files
             app.UseRouting();            
             //подключаем аутентификацию и авторизацию
             app.UseCookiePolicy();
-            app.UseAuthentication();
+            app.UseAuthentication();//ко времени обращения к системе маршрутизации, контроллерам и их методам, куки должным образом обработаны и установлены
             app.UseAuthorization();
             app.UseEndpoints(endpoints => // registration need routes
             {

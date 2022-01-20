@@ -19,7 +19,7 @@ namespace eugeneCollections.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            return View(dataManager.Collections.GetCollections());
+            return View(dataManager);
         }
     }
 }
