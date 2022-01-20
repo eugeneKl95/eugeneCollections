@@ -1,30 +1,34 @@
-﻿<div class="col-4 col-12-narrower">
+﻿@model DataManager
+<div class="col-4 col-12-midium">
     <div id="sidebar">
         <!-- Sidebar -->
         <section>
-            <h3>Tags</h3>
-            <p>
-                Phasellus quam turpis, feugiat sit amet ornare in, hendrerit in lectus.
-                Praesent semper mod quis eget mi. Etiam eu ante risus. Aliquam erat volutpat.
-                Aliquam luctus et mattis lectus sit amet pulvinar. Nam turpis et nisi etiam.
-            </p>
-            <footer>
-                <a href="#" class="button">Continue Reading</a>
-            </footer>
+            <div class="Widget widget tagcloud"> 
+            <h4 class="WidgetHeader widget-header">Теги</h4> 
+                <div class="WidgetContent widget-content"> 
+                    <ul> 
+                        @if (Model.Tags.GetAllTags().Any())
+                        {
+                            @foreach (Tag tag in Model.Tags.GetAllTags())
+                            {
+                               <li>
+                                   <a href="" class="smallest" title="@tag.TextTag">@tag.TextTag</a>
+                               </li>
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
         </section>
         <section>
             <h3>Collections</h3>
             <ul class="links">
-                <li><a href="#">Amet turpis, feugiat et sit amet</a></li>
-                <li><a href="#">Ornare in hendrerit in lectus</a></li>
-                <li><a href="#">Semper mod quis eget mi dolore</a></li>
-                <li><a href="#">Consequat etiam lorem phasellus</a></li>
-                <li><a href="#">Amet turpis, feugiat et sit amet</a></li>
-                <li><a href="#">Semper mod quisturpis nisi</a></li>
+                @foreach (Theme theme in Model.Themes.GetThemes())
+                {
+                    <li><a href="#">@theme.Name</a></li>
+                }
+
             </ul>
-            <footer>
-                <a href="#" class="button">More Random Links</a>
-            </footer>
         </section>
 
     </div>

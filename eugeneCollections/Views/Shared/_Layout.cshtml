@@ -11,9 +11,11 @@
         <!-- Main -->
         <section class="wrapper style1">
             <div class="container">
-                <div class="row gtr-200">
-                    @RenderBody();
-                    @await Html.PartialAsync("SidebarPartial")
+                <div class="row main-row">
+                    <div class="col-8 col-12-medium">
+                        @RenderBody();
+                    </div>
+                        @await Html.PartialAsync("SidebarPartial")                    
                 </div>
             </div>
         </section>
