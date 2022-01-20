@@ -1,5 +1,6 @@
 ﻿using eugeneCollections.Domain.Entities;
 using eugeneCollections.Domain.Repositories.Abstract;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,18 @@ namespace eugeneCollections.Domain.Repositories.EntityFramework
         public EFUserRepository(AppDbContext context)=>this.context=context;
         public void BlockUserById(string id)
         {
-            User user = (User)context.Users.Where(d=>d.Id==id).FirstOrDefault();
-
+            User user = new User();
+            user.Id = id;//(User)context.Users.Where(d=>d.Id==id).FirstOrDefault();
+            user.State = "Blocked";
+            context.Users.Update(user);
+            context.SaveChanges();
         }
 
         public void DeleteUserById(string id)
         {
-            throw new NotImplementedException();
+            //User user = (User)context.Users.Where(d => d.Id == id).FirstOrDefault();
+            context.Users.Remove(new User() { Id=id});
+            context.SaveChanges();
         }
 
         public IQueryable<User> GetAllUsers()
@@ -30,17 +36,20 @@ namespace eugeneCollections.Domain.Repositories.EntityFramework
 
         public User GetUserById(string id)
         {
-            throw new NotImplementedException();
+            return context.Users.Where(o=>o.Id==id).FirstOrDefault();
         }
 
         public void SetAdmin(string id)
         {
-            throw new NotImplementedException();
+            User user = context.Users.Where(t=>t.Id==id).FirstOrDefault();
+            //context.Entry<IdentityUserRole<string>>()
         }
 
         public void UnblockUserById(string id)
         {
-            throw new NotImplementedException();
+            User user = context.Users.Where(t => t.Id == id).FirstOrDefault();
+            user.State = "Active";
+            context.SaveChanges();
         }
     }
 }

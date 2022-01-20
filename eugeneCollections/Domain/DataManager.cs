@@ -14,7 +14,8 @@ namespace eugeneCollections.Domain
         public ITagRepository Tags { get; set; }
         public IThemeRepository Themes { get; set; }
         public IUserRepository Users { get; set; }
-        public DataManager(ICollectionRepository collection,ICommentRepository comment,IItemRepository item,ITagRepository tag,IThemeRepository theme,IUserRepository user)
+        public ILikeRepository Likes { get; set; }
+        public DataManager(ICollectionRepository collection,ICommentRepository comment,IItemRepository item,ITagRepository tag,IThemeRepository theme,IUserRepository user,ILikeRepository like)
         {
             Collections = collection;
             Comments = comment;
@@ -22,6 +23,7 @@ namespace eugeneCollections.Domain
             Tags = tag;
             Themes = theme;
             Users = user;
+            Likes = like;
         }
     }
 }

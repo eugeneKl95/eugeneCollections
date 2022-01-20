@@ -8,7 +8,7 @@ namespace eugeneCollections.Domain.Repositories.Abstract
 {
     public interface ILikeRepository 
     {
-        public IQueryable<Like> GetLikes(int ItemId);
+        public int GetCountLikesByItemId(int ItemId);
         public void AddLike(string UserId, int ItemId);
     }
 }

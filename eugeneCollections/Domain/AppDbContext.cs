@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace eugeneCollections.Domain
 {
-    public class AppDbContext : IdentityDbContext<IdentityUser>
+    public class AppDbContext : IdentityDbContext<User>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         public DbSet<Collection> Collections { get; set; }
@@ -17,7 +17,7 @@ namespace eugeneCollections.Domain
         public DbSet<Item> Items { get; set; }
         public DbSet<Like> Likes {get; set;}
         public DbSet<Tag> Tags { get; set; }
-        public DbSet<Theme> Themes { get; set; }
+        public DbSet<Theme> Themes { get; set; }      
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -55,38 +55,44 @@ namespace eugeneCollections.Domain
             });
             modelBuilder.Entity<Like>().HasKey(y=>new {y.UserId, y.ItemId });
 
-
+            //modelBuilder.Entity<Theme>().Property(g => g.Id).IsRequired();
             modelBuilder.Entity<Theme>().HasData(new Theme
             {
+                Id=1,
                 Name = "Коты",
                 Description = "Данный набор поможет вам быстро создать коллекцию котов"
 
             });
             modelBuilder.Entity<Theme>().HasData(new Theme
             {
+                Id=2,
                 Name = "Собаки",
                 Description = "Данный набор поможет вам быстро создать коллекцию собак"
             });
             modelBuilder.Entity<Theme>().HasData(new Theme
             {
+                Id=3,
                 Name = "Алкоголь",
                 Description = "Данный набор поможет вам быстро создать коллекцию алкогольных напитков"
 
             });
             modelBuilder.Entity<Theme>().HasData(new Theme
             {
+                Id=4,
                 Name = "Цветы",
                 Description = "Данный набор поможет вам быстро создать коллекцию цветов"
 
             });
             modelBuilder.Entity<Theme>().HasData(new Theme
             {
+                Id=5,
                 Name = "Книги",
                 Description = "Данный набор поможет вам быстро создать коллекцию книг"
 
             });
             modelBuilder.Entity<Theme>().HasData(new Theme
             {
+                Id=6,
                 Name = "Автомобили",
                 Description = "Данный набор поможет вам быстро создать коллекцию автомобилей"
 

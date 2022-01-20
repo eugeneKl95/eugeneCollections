@@ -1,4 +1,5 @@
-﻿using eugeneCollections.Models;
+﻿using eugeneCollections.Domain.Entities;
+using eugeneCollections.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,9 @@ namespace eugeneCollections.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
-        public AccountController(UserManager<IdentityUser> userMgr, SignInManager<IdentityUser> signinMgr)
+        private readonly UserManager<User> userManager;
+        private readonly SignInManager<User> signInManager;
+        public AccountController(UserManager<User> userMgr, SignInManager<User> signinMgr)
         {
             userManager = userMgr;
             signInManager = signinMgr;
@@ -32,7 +33,7 @@ namespace eugeneCollections.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityUser user = await userManager.FindByNameAsync(model.UserName);
+                User user = await userManager.FindByNameAsync(model.UserName);
                 if (user != null)
                 {
                     await signInManager.SignOutAsync();

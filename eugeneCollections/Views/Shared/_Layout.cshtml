@@ -7,13 +7,19 @@
 <body class="is-preload">
     <div id="page-wrapper">
         <!-- Header -->
-        @await Html.PartialAsync("HeaderPartial") 
+        @await Html.PartialAsync("HeaderPartial")
         <!-- Main -->
-        @RenderBody();
-
+        <section class="wrapper style1">
+            <div class="container">
+                <div class="row gtr-200">
+                    @RenderBody();
+                    @await Html.PartialAsync("SidebarPartial")
+                </div>
+            </div>
+        </section>
         <!-- Footer -->
-        @await Html.PartialAsync("FooterPartial") 
-                  
+        @await Html.PartialAsync("FooterPartial")
+
     </div>
     @await Html.PartialAsync("ScriptsPartial") 
 </body>

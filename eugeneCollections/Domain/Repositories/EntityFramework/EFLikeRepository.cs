@@ -19,9 +19,9 @@ namespace eugeneCollections.Domain.Repositories.EntityFramework
             context.SaveChanges();
         }
 
-        public IQueryable<Like> GetLikes(int ItemId)
+        public int GetCountLikesByItemId(int ItemId)
         {
-           return context.Likes.Where(p=>p.ItemId==ItemId);
+           return context.Likes.Where(p=>p.ItemId==ItemId).Count();
         }
     }
 }
