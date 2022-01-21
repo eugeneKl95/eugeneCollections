@@ -1,0 +1,23 @@
+﻿@model IQueryable<Collection>
+<h1>@Model</h1>
+@if (Model.Any())
+{
+<div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    @foreach (Collection collection in Model)
+    { 
+    <div class="feature col">
+        <div class="feature-icon bg-primary bg-gradient">
+            <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"></use></svg>
+        </div>
+        <h2>@collection.Name</h2>
+        <p>@collection.Description</p>
+        <p>@collection.DateCreating</p>
+        <p>@collection.User.UserName</p>
+        <a href="#" class="icon-link">
+            Подробнее...
+            <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+        </a>
+    </div>
+    }
+</div>    
+}

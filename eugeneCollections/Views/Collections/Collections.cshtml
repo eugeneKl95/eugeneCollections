@@ -5,7 +5,7 @@
     var imagePath = "";
 }
 <h1>Коллекции</h1>
-<form method="post">
+<form method="post">    
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -22,8 +22,8 @@
                                 <p class="card-text">@c.Description</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Collections" asp-action="ViewCollection">View</button>
-                                        <button type="button" class="btn btn-sm btn-outline-secondary" asp-controller="Collections" asp-action="AddCollection">Create</button>
+                                        <a href="/Collections/ViewCollection">View</a>
+                                        <a href="/Collections/AddCollection">Create</a>                                        
                                     </div>
                                     @*<small class="text-muted">9 mins</small>*@
                                 </div>

@@ -1,5 +1,6 @@
 ﻿using eugeneCollections.Domain.Entities;
 using eugeneCollections.Domain.Repositories.Abstract;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,12 +26,12 @@ namespace eugeneCollections.Domain.Repositories.EntityFramework
 
         public IQueryable<Collection> GetCollections() //get all collections
         {
-            return context.Collections;
+            return context.Collections.Include(t => t.Theme).Include(u=>u.User);
         }
 
         public IQueryable<Collection> GetCollectionsByUser(string Id)
         {
-            return context.Collections.Where(t=>t.UserId==Id);
+            return context.Collections.Include(u=>u.User).Include(t=>t.Theme).Where(t=>t.UserId==Id);
         }
 
         public void SaveCollection(Collection entity)//????
@@ -41,6 +42,11 @@ namespace eugeneCollections.Domain.Repositories.EntityFramework
         public void UpdateCollection(Collection collection)
         {
             context.Collections.Update(collection);
+        }        
+
+        public IQueryable<Collection> GetCollectionsByThemeId(int id)
+        {
+            return context.Collections.Include(u => u.User).Include(t => t.Theme).Where(k => k.ThemeId == id);
         }
     }
 }

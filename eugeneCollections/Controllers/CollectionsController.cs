@@ -1,6 +1,7 @@
 ﻿using eugeneCollections.Domain;
 using eugeneCollections.Domain.Entities;
 using eugeneCollections.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,17 +19,25 @@ namespace eugeneCollections.Controllers
             this.dataManager = dataManager;
             this.context = context;
         } 
-            
+        [HttpGet]
         public IActionResult Index()
         {
             return View("Collections",dataManager.Themes.GetThemes());
         }
+        [HttpPost]
+        public IActionResult Index(Theme theme)
+        {
+            return RedirectToAction("ViewCollection", theme);
+        }
+
         [HttpGet]
-        public IActionResult AddCollection()
+        [Authorize]
+        public IActionResult AddCollection(Theme theme)
         {
             return View();
         }
         [HttpPost]
+        [Authorize]
         public IActionResult AddCollection(AddCollectionViewModel addCollection)
         {
             Collection collection = new Collection();
@@ -38,7 +47,11 @@ namespace eugeneCollections.Controllers
             collection.PathImg = addCollection.PathImg;
             context.Collections.Add(collection);
             context.SaveChanges();
-            return Redirect("/Collections/Index");
+            return RedirectToAction("Index");
+        }
+        public IActionResult ViewCollection(Theme theme)
+        {
+            return View(dataManager.Collections.GetCollectionsByThemeId(theme.Id));
         }
     }
 }
