@@ -1,0 +1,14 @@
+﻿@model IQueryable<Theme>
+  
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Коллекции
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                    @foreach (Theme theme in Model)
+                    {
+                        <li><a class="dropdown-item" href="#">@theme.Name</a></li>
+                    }
+                </ul>
+            </li>

@@ -87,5 +87,9 @@ namespace eugeneCollections.Controllers
                 // Появление этого сообщения означает наличие ошибки; повторное отображение формы
             }   return View(model);
         }
+        public IActionResult Accessdenied()
+        {
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

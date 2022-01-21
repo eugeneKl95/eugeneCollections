@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eugeneCollections.Domain;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace eugeneCollections.Models
         public string UserName { get; set; }
 
         [Required]
+        [DataType(DataType.EmailAddress)]
         [Display(Name = "Email")]
         public string Email { get; set; }
 

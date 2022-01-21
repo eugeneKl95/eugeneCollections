@@ -1,20 +1,12 @@
-﻿@model DataManager
+﻿
 <div id="header">    
-<nav id="nav">
-    <ul>
-        <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-        <li>@Html.ActionLink("Информация", "About", "Home")</li>
-        <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>
-        <li>
-            <a href="#">Collections</a>
-            <ul class="nav navbar-nav">
-                @foreach (Theme theme in Model.Themes.GetThemes())
-                {
-                    <li><a href="#">@theme.Name</a></li>
-                }
-            </ul>
-        </li>        
-    </ul>
-    @Html.Partial("_LoginPartial")
-</nav>
+    <nav id="nav">
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
+            <li>@Html.ActionLink("Информация", "About", "Home")</li>
+            <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>
+            @await Component.InvokeAsync("DropDown")
+            @await Html.PartialAsync("_LoginPartial")
+        </ul>       
+    </nav>
 </div>
