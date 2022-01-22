@@ -3,6 +3,7 @@ using eugeneCollections.Domain.Entities;
 using eugeneCollections.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace eugeneCollections.Areas.Admin.Controllers
@@ -11,18 +12,21 @@ namespace eugeneCollections.Areas.Admin.Controllers
     public class HomeController : Controller
     {
         private readonly DataManager dataManager;
-        UserManager<User> userManager;
+        private readonly UserManager<User> userManager;
+        private readonly RoleManager<IdentityRole> roleManager;
 
-        public HomeController(DataManager dataManager, UserManager<User> userManager)
+        public HomeController(DataManager dataManager, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.dataManager = dataManager;
             this.userManager = userManager;
+            this.roleManager = roleManager;
         }
 
         public IActionResult Index()
         {
             return View(dataManager);
         }
+        [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
             User user = await userManager.FindByIdAsync(id);
@@ -30,7 +34,11 @@ namespace eugeneCollections.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            EditUserViewModel model = new EditUserViewModel { Id = user.Id, Email = user.Email, UserName = user.UserName };
+            var userRoles = await userManager.GetRolesAsync(user);
+            var allRoles = roleManager.Roles.ToList();
+            EditUserViewModel model = new EditUserViewModel 
+            { Id = user.Id, Email = user.Email, UserName = user.UserName,
+                UserRoles=userRoles,AllRoles=allRoles, State=user.State };
             return View(model);
         }
 
@@ -43,7 +51,8 @@ namespace eugeneCollections.Areas.Admin.Controllers
                 if (user != null)
                 {
                     user.Email = model.Email;
-                    user.UserName = model.Email;
+                    user.UserName = model.UserName;
+                    user.State = model.State;
 
                     var result = await userManager.UpdateAsync(user);
                     if (result.Succeeded)

@@ -4,6 +4,7 @@ using eugeneCollections.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace eugeneCollections.Controllers
@@ -14,11 +15,15 @@ namespace eugeneCollections.Controllers
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
         private readonly DataManager dataManager;
-        public AccountController(UserManager<User> userMgr, SignInManager<User> signinMgr,DataManager datamanager)
+        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly AppDbContext context;
+        public AccountController(UserManager<User> userMgr, SignInManager<User> signinMgr,DataManager datamanager, RoleManager<IdentityRole> roleManager, AppDbContext context)
         {
             userManager = userMgr;
             signInManager = signinMgr;
             dataManager = datamanager;
+            this.roleManager = roleManager;
+            this.context = context;
         }
 
         [AllowAnonymous]
@@ -69,10 +74,11 @@ namespace eugeneCollections.Controllers
             if (ModelState.IsValid)
             {
                 User user = new User { Email = model.Email, UserName = model.UserName, State="Active" };
-                // добавляем пользователя
-                var result = await userManager.CreateAsync(user, model.Password);
+                // добавляем пользователя                
+                var result = await userManager.CreateAsync(user, model.Password);                
                 if (result.Succeeded)
                 {
+                    var res=userManager.AddToRoleAsync(user,"user");
                     // установка куки
                     await signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
