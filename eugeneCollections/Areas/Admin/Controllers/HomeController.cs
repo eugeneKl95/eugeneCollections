@@ -3,6 +3,7 @@ using eugeneCollections.Domain.Entities;
 using eugeneCollections.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,12 +15,14 @@ namespace eugeneCollections.Areas.Admin.Controllers
         private readonly DataManager dataManager;
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly AppDbContext appDbContext;
 
-        public HomeController(DataManager dataManager, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public HomeController(DataManager dataManager, UserManager<User> userManager, RoleManager<IdentityRole> roleManager,AppDbContext context)
         {
             this.dataManager = dataManager;
             this.userManager = userManager;
             this.roleManager = roleManager;
+            appDbContext = context;
         }
 
         public IActionResult Index()
@@ -43,7 +46,7 @@ namespace eugeneCollections.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(EditUserViewModel model)
+        public async Task<IActionResult> Edit(EditUserViewModel model,string userRoles, string newRole,string status)
         {
             if (ModelState.IsValid)
             {
@@ -52,11 +55,15 @@ namespace eugeneCollections.Areas.Admin.Controllers
                 {
                     user.Email = model.Email;
                     user.UserName = model.UserName;
-                    user.State = model.State;
+                    user.State = status;
 
                     var result = await userManager.UpdateAsync(user);
                     if (result.Succeeded)
                     {
+                        var res1 =await userManager.RemoveFromRoleAsync(user, userRoles);
+                        var res = await userManager.AddToRoleAsync(user, newRole);
+                        appDbContext.Users.Update(user);
+                        int t=await appDbContext.SaveChangesAsync();
                         return RedirectToAction("Index");
                     }
                     else
