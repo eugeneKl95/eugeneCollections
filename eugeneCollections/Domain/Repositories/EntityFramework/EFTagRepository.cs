@@ -24,9 +24,9 @@ namespace eugeneCollections.Domain.Repositories.EntityFramework
             return context.Tags;
         }
 
-        public IQueryable<Tag> GetTagByItem(int id)
+        public IQueryable<Tag> GetTagByCollection(int id)
         {
-            return context.Tags.Where(j=>j.ItemId==id);
+            return context.Tags.Where(j => j.CollectionId == id);
         }
     }
 }

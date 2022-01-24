@@ -9,6 +9,6 @@ namespace eugeneCollections.Domain.Repositories.Abstract
     public interface ICommentRepository
     {
         public void AddComment(Comment comment);
-        public IQueryable<Comment> GetComments(int id);//get comment by ItemId
+        public IQueryable<Comment> GetComments(int id);//get comment by ColectionId
     }
 }

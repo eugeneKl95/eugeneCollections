@@ -9,6 +9,6 @@ namespace eugeneCollections.Domain.Repositories.Abstract
     public interface ILikeRepository 
     {
         public int GetCountLikesByItemId(int ItemId);
-        public void AddLike(string UserId, int ItemId);
+        public void AddLike(string UserId, int CollectionId);
     }
 }

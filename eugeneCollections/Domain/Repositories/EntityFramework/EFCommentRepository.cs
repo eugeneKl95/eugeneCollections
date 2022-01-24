@@ -16,7 +16,7 @@ namespace eugeneCollections.Domain.Repositories.EntityFramework
         
         public IQueryable<Comment> GetComments(int id)
         {
-            return context.Comments.Where(g => g.ItemId == id);
+            return context.Comments.Where(g => g.CollectionId == id);
         }
     }
 }

@@ -14,7 +14,6 @@ namespace eugeneCollections.Domain
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         public DbSet<Collection> Collections { get; set; }
         public DbSet<Comment> Comments { get; set; }
-        public DbSet<Item> Items { get; set; }
         public DbSet<Like> Likes {get; set;}
         public DbSet<Tag> Tags { get; set; }
         public DbSet<Theme> Themes { get; set; }      
@@ -53,7 +52,7 @@ namespace eugeneCollections.Domain
                 RoleId = "453a9142b-6d96-44fe-b817-982b5528f922",
                 UserId = "2e7260d4-1372-412d-aadb-061d53bb1ec3"
             });
-            modelBuilder.Entity<Like>().HasKey(y=>new {y.UserId, y.ItemId });
+            modelBuilder.Entity<Like>().HasKey(y=>new {y.UserId, y.CollectiionId });
 
             //modelBuilder.Entity<Theme>().Property(g => g.Id).IsRequired();
             modelBuilder.Entity<Theme>().HasData(new Theme

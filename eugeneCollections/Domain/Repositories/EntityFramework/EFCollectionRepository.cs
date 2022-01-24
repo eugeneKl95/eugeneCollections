@@ -26,12 +26,14 @@ namespace eugeneCollections.Domain.Repositories.EntityFramework
 
         public IQueryable<Collection> GetCollections() //get all collections
         {
-            return context.Collections.Include(t => t.Theme).Include(u=>u.User);
+            return context.Collections.Include(t => t.Theme).Include(u=>u.User)
+                .Include(f=>f.Comments).Include(d=>d.Tags);
         }
 
         public IQueryable<Collection> GetCollectionsByUser(string Id)
         {
-            return context.Collections.Include(u=>u.User).Include(t=>t.Theme).Where(t=>t.UserId==Id);
+            return context.Collections.Include(u=>u.User).Include(t=>t.Theme)
+                .Include(f => f.Comments).Include(d => d.Tags).Where(t=>t.UserId==Id);
         }
 
         public void SaveCollection(Collection entity)//????
@@ -46,7 +48,8 @@ namespace eugeneCollections.Domain.Repositories.EntityFramework
 
         public IQueryable<Collection> GetCollectionsByThemeId(int id)
         {
-            return context.Collections.Include(u => u.User).Include(t => t.Theme).Where(k => k.ThemeId == id);
+            return context.Collections.Include(u => u.User).Include(t => t.Theme)
+                .Include(f => f.Comments).Include(d => d.Tags).Where(k => k.ThemeId == id);
         }
     }
 }

@@ -12,16 +12,16 @@ namespace eugeneCollections.Domain.Repositories.EntityFramework
         private readonly AppDbContext context;
         public EFLikeRepository(AppDbContext context)=>this.context=context;
 
-        public void AddLike(string UserId, int ItemId)
+        public void AddLike(string UserId, int CollectionId)
         {
-            Like like = new Like() { UserId=UserId, ItemId=ItemId};
+            Like like = new Like() { UserId = UserId, CollectiionId=CollectionId};
             context.Likes.Add(like);
             context.SaveChanges();
         }
 
-        public int GetCountLikesByItemId(int ItemId)
+        public int GetCountLikesByItemId(int CollectionId)
         {
-           return context.Likes.Where(p=>p.ItemId==ItemId).Count();
+           return context.Likes.Where(p=>p.CollectiionId==CollectionId).Count();
         }
     }
 }

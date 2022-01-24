@@ -8,6 +8,6 @@ namespace eugeneCollections.Domain.Entities
     public class Like
     {
         public string UserId { get; set; }
-        public int ItemId { get; set; }
+        public int CollectiionId { get; set; }
     }
 }

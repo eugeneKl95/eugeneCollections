@@ -24,7 +24,6 @@ namespace eugeneCollections
             Configuration.Bind("Project", new Config()); //connection config from appsetting.json
             services.AddTransient<ICollectionRepository, EFCollectionRepository>();
             services.AddTransient<ICommentRepository, EFCommentRepository>();
-            services.AddTransient<IItemRepository, EFItemRepository>();
             services.AddTransient<ILikeRepository, EFLikeRepository>();
             services.AddTransient<ITagRepository, EFTagRepository>();
             services.AddTransient<IThemeRepository, EFThemeRepository>();

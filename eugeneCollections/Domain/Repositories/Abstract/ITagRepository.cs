@@ -10,6 +10,6 @@ namespace eugeneCollections.Domain.Repositories.Abstract
     {
         public void AddTag(Tag tag);
         public IQueryable<Tag> GetAllTags();
-        public IQueryable<Tag> GetTagByItem(int id);
+        public IQueryable<Tag> GetTagByCollection(int id);
     }
 }

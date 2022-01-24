@@ -10,16 +10,14 @@ namespace eugeneCollections.Domain
     {
         public ICollectionRepository Collections { get; set; }
         public ICommentRepository Comments { get; set; }
-        public IItemRepository Items { get; set; }
         public ITagRepository Tags { get; set; }
         public IThemeRepository Themes { get; set; }
         public IUserRepository Users { get; set; }
         public ILikeRepository Likes { get; set; }
-        public DataManager(ICollectionRepository collection,ICommentRepository comment,IItemRepository item,ITagRepository tag,IThemeRepository theme,IUserRepository user,ILikeRepository like)
+        public DataManager(ICollectionRepository collection,ICommentRepository comment,ITagRepository tag,IThemeRepository theme,IUserRepository user,ILikeRepository like)
         {
             Collections = collection;
             Comments = comment;
-            Items = item;
             Tags = tag;
             Themes = theme;
             Users = user;

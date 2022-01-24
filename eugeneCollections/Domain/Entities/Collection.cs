@@ -17,5 +17,7 @@ namespace eugeneCollections.Domain.Entities
         public string PathImg { get; set; }
         public User User { get; set; }
         public Theme Theme { get; set; }
+        public List<Tag> Tags { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 }
