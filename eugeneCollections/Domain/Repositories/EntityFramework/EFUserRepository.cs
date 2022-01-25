@@ -1,14 +1,22 @@
 ﻿using eugeneCollections.Domain.Entities;
 using eugeneCollections.Domain.Repositories.Abstract;
+using Microsoft.AspNetCore.Identity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace eugeneCollections.Domain.Repositories.EntityFramework
 {
     public class EFUserRepository:IUserRepository
     {
         private readonly AppDbContext context;
+        private readonly UserManager<User> userManager;
 
-        public EFUserRepository(AppDbContext context)=>this.context=context;
+        public EFUserRepository(AppDbContext context,UserManager<User> userManager) 
+        {
+            this.context = context;
+            this.userManager = userManager;
+        }
+        
         public void BlockUserById(string id)
         {
             User user = new User();
@@ -35,11 +43,10 @@ namespace eugeneCollections.Domain.Repositories.EntityFramework
             return context.Users.Where(o=>o.Id==id).FirstOrDefault();
         }
 
-        public void SetAdmin(string id)
+        public User GetUserByName(string name)
         {
-            User user = context.Users.Where(t=>t.Id==id).FirstOrDefault();
-            //context.Entry<IdentityUserRole<string>>()
-        }
+            return context.Users.Where(u=>u.UserName==name).FirstOrDefault();
+        }        
 
         public void UnblockUserById(string id)
         {

@@ -36,14 +36,15 @@ namespace eugeneCollections.Domain.Repositories.EntityFramework
                 .Include(f => f.Comments).Include(d => d.Tags).Where(t=>t.UserId==Id);
         }
 
-        public void SaveCollection(Collection entity)//????
+        public Collection GetCollectionById(int id)
         {
-            ;
+            return context.Collections.Where(f => f.Id == id).FirstOrDefault(); 
         }
 
         public void UpdateCollection(Collection collection)
         {
             context.Collections.Update(collection);
+            context.SaveChanges();
         }        
 
         public IQueryable<Collection> GetCollectionsByThemeId(int id)

@@ -1,29 +1,37 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject UserManager<IdentityUser> UserManager
-@model AddCollectionViewModel
+﻿@model AddCollectionViewModel
 @{
-    ViewData["Title="] = "Добавление коллекции";
-    Model.UserId = "";
+    ViewData["Title="] = "Добавление коллекции";    
 }
+<script src="~/js/ckeditor/ckeditor.js"></script>
 <h1>Добавить коллекцию</h1>
+<form id="form" method="post" enctype="multipart/form-data"
+      data-pasley-validate class="form-horizontal form-label-left">
+    <div class="form-group">
+        <input type="hidden" asp-for="PathImg" name="PathImg" />
+        <span asp-validation-for="PathImg"></span>
+        <label class="control-label col-md-2">
+            Загрузите своё фото<span class="required">*</span>
+        </label>
+        <div class="col-md-6" id="dropzone">
+            <div action="/Collection/AddCollection" class="dropzone" id="uploader">
+                Drop files here!<br />
+            </div>
+        </div>
+    </div>
+</form>
 <form method="post" asp-controller="Collections" asp-action="AddCollection">
     <div asp-validation-summary="ModelOnly"></div>
-    <input type="hidden" value="@Model.UserId" asp-for="UserId" />
-    <input type="hidden" value="@Model.ThemeId" asp-for="ThemeId"/>
+    <input type="hidden" value="UserName" asp-for="UserName" />    
     <div>
-        <label asp-for="ThemeCollection">Тема коллекции</label><br />
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                Тема коллекции
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-        </div>
-        <input asp-for="ThemeCollection" />
-        <span asp-validation-for="ThemeCollection"></span>
+        <label for="themes" asp-for="ThemeId">Тема коллекции</label><br />
+        <select name="themes">
+        @foreach (var theme in ViewBag.Themes)
+        {
+            <option value="@theme.Id">@theme.Name</option>
+        }
+        </select>
+        <input asp-for="ThemeId" type="hidden"/>
+        <span asp-validation-for="ThemeId"></span>
     </div>
     <div>
         <label asp-for="NameCollection">Название коллекции</label><br />
@@ -31,19 +39,24 @@
         <span asp-validation-for="NameCollection"></span>
     </div>
     <div>
-        <label asp-for="DescriptionCollection">Краткое описание</label><br />
+        <label asp-for="DescriptionCollection">Добавьте описание</label><br />
         <input asp-for="DescriptionCollection" />
         <span asp-validation-for="DescriptionCollection"></span>
     </div>
-    <div>
+    
+    @*<div>
         <label asp-for="PathImg">Добавить картинку</label><br />
         <input asp-for="PathImg" />
         <span asp-validation-for="PathImg"></span>
-    </div>
+        
+    </div>*@
     <div>
         <input type="submit" value="Создать" />
     </div>
 </form>
 <script>
-
+window.onload = function() {
+        var newCKEdit = CKEDITOR.replace('@Html.IdFor(x=>x.DescriptionCollection)');
+    newCKEdit.updateElement();
+    }
 </script>

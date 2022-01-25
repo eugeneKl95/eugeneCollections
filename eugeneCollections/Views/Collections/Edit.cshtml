@@ -1,0 +1,71 @@
+﻿@model Collection
+@{
+    ViewData["Title="] = "Редактирование коллекции";
+}
+<script src="~/js/ckeditor/ckeditor.js"></script>
+<h1>Редактировать коллекцию</h1>
+<form id="form" method="post" enctype="multipart/form-data"
+      data-pasley-validate class="form-horizontal form-label-left">
+    <div class="form-group">
+        <input type="hidden" asp-for="PathImg" name="PathImg" />
+        <span asp-validation-for="PathImg"></span>
+        <label class="control-label col-md-2">
+            Загрузите своё фото<span class="required">*</span>
+        </label>
+        <div class="col-md-6" id="dropzone">
+            <div action="/Collection/AddCollection" class="dropzone" id="uploader">
+                Drop files here!<br />
+            </div>
+        </div>
+    </div>
+</form>
+<form method="post" asp-controller="Collections" asp-action="AddCollection" asp-route-returnUrl="@ViewBag.returnUrl">
+    <div asp-validation-summary="ModelOnly"></div>
+    <input type="hidden" value="@Model.User.Id" asp-for="@Model.UserId" />
+    <div>
+        <label for="themes" asp-for="ThemeId">Тема коллекции</label><br />
+        <div class="form-group">
+            <label asp-for="@Model.ThemeId" class="control-label">@Model.Theme.Name</label>
+            <input type="text" asp-for="@Model.ThemeId" value="@Model.Theme.Id" class="form-control" />
+        </div>
+        <select name="@Model.ThemeId">
+            @foreach (var theme in ViewBag.Themes)
+            {
+                <option value="@theme.Id">@theme.Name</option>
+            }
+        </select>
+        <input asp-for="ThemeId" type="hidden" />
+        <span asp-validation-for="ThemeId"></span>
+    </div>
+    <div>
+        <label asp-for="Name">Название коллекции</label><br />
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div>
+        <label asp-for="Description">Добавьте описание</label><br />
+        <textarea asp-for="Description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+
+    @*<div>
+            <label asp-for="PathImg">Добавить картинку</label><br />
+            <input asp-for="PathImg" />
+            <span asp-validation-for="PathImg"></span>
+
+        </div>*@
+    <div>
+        <input type="submit" value="Создать" />
+    </div>
+</form>
+<script>
+window.onload = function() {
+        var newCKEdit = CKEDITOR.replace('@Html.IdFor(x=>x.Description)');
+    newCKEdit.updateElement();
+    }
+</script>
+
+
+
+
+

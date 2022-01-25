@@ -4,9 +4,9 @@ namespace eugeneCollections.Models
 {
     public class AddCollectionViewModel
     {
-        [Required]
-        [Display(Name ="Тема коллекции")]
-        public string ThemeCollection { get; set; }
+        //[Required]
+        //[Display(Name ="Тема коллекции")]
+        //public string ThemeCollection { get; set; }
         [Required]
         [Display(Name = "Название коллекции")]
         public string NameCollection { get; set; }
@@ -16,7 +16,7 @@ namespace eugeneCollections.Models
         [Required]
         [Display(Name = "URL картинки")]
         public string PathImg { get; set; }
-        public string UserId { get; set; }
+        public string UserName { get; set; }
         public int ThemeId { get; set; }
     }
 }

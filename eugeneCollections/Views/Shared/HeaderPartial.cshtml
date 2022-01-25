@@ -1,12 +1,12 @@
-﻿
-<div id="header">    
+﻿<div id="header">    
     <nav id="nav">
         <ul class="nav navbar-nav">
             <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
-            <li>@Html.ActionLink("Информация", "About", "Home")</li>
-            <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>
-            @await Component.InvokeAsync("DropDown")
-            @await Html.PartialAsync("_LoginPartial")
-        </ul>       
+        </ul>
+        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+            <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+        </form>
+        @await Component.InvokeAsync("DropDown")
+        @await Html.PartialAsync("_LoginPartial")
     </nav>
 </div>

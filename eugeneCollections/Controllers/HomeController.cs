@@ -17,7 +17,7 @@ namespace eugeneCollections.Controllers
         }
         public IActionResult Index()
         {
-            return View(dataManager);
+            return View(dataManager.Collections.GetCollections());
         }
     }
 }

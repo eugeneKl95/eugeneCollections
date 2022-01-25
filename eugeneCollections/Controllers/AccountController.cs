@@ -45,7 +45,7 @@ namespace eugeneCollections.Controllers
                     await signInManager.SignOutAsync();
                     Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
                     if (result.Succeeded)
-                    {
+                    {                        
                         return Redirect(returnUrl ?? "/");
                     }
                 }
