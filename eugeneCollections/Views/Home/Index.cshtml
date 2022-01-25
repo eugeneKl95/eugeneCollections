@@ -23,17 +23,19 @@
                 <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
                     @foreach (var coll in Model)
                     {
-                        <div class="feature col">
-                            <div class="feature-icon bg-primary bg-gradient">
-                                <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"></use></svg>
-                            </div>
-                            <h2>@coll.Name</h2>
-                            <p>@coll.Description</p>
-                            <a href="#" class="icon-link">
-                                Подробнее
-                                <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
-                            </a>
+                    <div class="feature col">
+                        <div class="feature-icon bg-primary bg-gradient">
+                            <svg class="bi" width="1em" height="1em"><use xlink:href="#collection"></use></svg>
                         </div>
+                        <h2>@coll.Name</h2>
+                        <p>Автор: @coll.User.UserName</p>
+                        <p>@coll.DateCreating</p>
+                        <p>@coll.Description</p>
+                        <a href="#" class="icon-link">
+                            Подробнее
+                            <svg class="bi" width="1em" height="1em"><use xlink:href="#chevron-right"></use></svg>
+                        </a>
+                    </div>
                     }
                 </div>
             }

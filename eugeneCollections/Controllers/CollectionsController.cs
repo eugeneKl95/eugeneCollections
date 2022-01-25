@@ -45,7 +45,7 @@ namespace eugeneCollections.Controllers
         }
         [HttpPost]
         [Authorize]
-        public  IActionResult AddCollection(AddCollectionViewModel addCollection,IFormFile file)
+        public  async Task<IActionResult> AddCollection(AddCollectionViewModel addCollection,IFormFile file)
         {
             //if (HttpContext.Request.Form.Files.Count != 0)
             //{
@@ -76,7 +76,7 @@ namespace eugeneCollections.Controllers
             collection.PathImg = addCollection.PathImg;
             collection.UserId = dataManager.Users.GetUserByName(addCollection.UserName).Id;
             context.Collections.Add(collection);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
         public IActionResult ViewCollection(Theme theme)
@@ -90,9 +90,9 @@ namespace eugeneCollections.Controllers
             return View(dataManager.Collections.GetCollectionById(id));
         }
         [HttpPost]
-        public IActionResult Edit(Collection collection,string returnUrl)
+        public async Task<IActionResult> Edit(Collection collection,string returnUrl)
         {
-            dataManager.Collections.UpdateCollection(collection);
+            await dataManager.Collections.UpdateCollection(collection);
             return Redirect(returnUrl ?? "/");
         }
     }

@@ -41,10 +41,10 @@ namespace eugeneCollections.Domain.Repositories.EntityFramework
             return context.Collections.Where(f => f.Id == id).FirstOrDefault(); 
         }
 
-        public void UpdateCollection(Collection collection)
+        public async Task UpdateCollection(Collection collection)
         {
             context.Collections.Update(collection);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }        
 
         public IQueryable<Collection> GetCollectionsByThemeId(int id)

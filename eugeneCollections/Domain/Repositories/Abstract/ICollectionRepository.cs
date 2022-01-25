@@ -10,7 +10,7 @@ namespace eugeneCollections.Domain.Repositories.Abstract
     {
         public void AddCollection(Collection collection);
         public void DeleteCollection(int id);
-        public void UpdateCollection(Collection collection);
+        public Task UpdateCollection(Collection collection);
         public Collection GetCollectionById(int id);
         public IQueryable<Collection> GetCollections();
         public IQueryable<Collection> GetCollectionsByUser(string Id);

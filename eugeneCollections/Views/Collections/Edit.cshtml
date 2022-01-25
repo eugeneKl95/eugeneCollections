@@ -47,7 +47,14 @@
         <textarea asp-for="Description" />
         <span asp-validation-for="Description"></span>
     </div>
+    <div>
+        <label asp-for="Description">Теги</label><br />
+        @foreach(string tag in Model.Tags)
+            {
 
+            }
+        <span asp-validation-for="Description"></span>
+    </div>
     @*<div>
             <label asp-for="PathImg">Добавить картинку</label><br />
             <input asp-for="PathImg" />
@@ -55,7 +62,7 @@
 
         </div>*@
     <div>
-        <input type="submit" value="Создать" />
+        <input type="submit" value="Созранить изменения" />
     </div>
 </form>
 <script>
