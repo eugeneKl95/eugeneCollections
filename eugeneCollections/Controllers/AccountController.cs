@@ -78,7 +78,7 @@ namespace eugeneCollections.Controllers
                 var result = await userManager.CreateAsync(user, model.Password);                
                 if (result.Succeeded)
                 {
-                    var res=userManager.AddToRoleAsync(user,"user");
+                    var res=await userManager.AddToRoleAsync(user,"user");
                     // установка куки
                     await signInManager.SignInAsync(user, false);
                     return RedirectToAction("Index", "Home");
